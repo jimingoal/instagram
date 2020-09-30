@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/feed_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -17,9 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   static List<Widget> _screen = <Widget>[
-    Container(
-      color: Colors.lightBlueAccent,
-    ),
+    FeedScreen(),
     Container(
       color: Colors.amberAccent,
     ),
