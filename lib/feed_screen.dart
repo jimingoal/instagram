@@ -5,10 +5,14 @@ class FeedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'instagram',
-          style: TextStyle(fontFamily: 'VeganStyle', color: Colors.black87),
+        leading: IconButton(icon: Icon(Icons.menu), onPressed: null),
+        title: Center(
+          child: Text(
+            'instagram',
+            style: TextStyle(fontFamily: 'VeganStyle', color: Colors.black87),
+          ),
         ),
+        actions: [ImageIcon(AssetImage('assets/images/actionbar_camera.png'))],
       ),
       body: ListView.builder(
         itemBuilder: feedListBuilder,
