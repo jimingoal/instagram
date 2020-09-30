@@ -16,6 +16,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int _selectedIndex = 0;
 
+  static List<Widget> _screen = <Widget>[
+    Container(
+      color: Colors.lightBlueAccent,
+    ),
+    Container(
+      color: Colors.amberAccent,
+    ),
+    Container(
+      color: Colors.cyanAccent,
+    ),
+    Container(
+      color: Colors.indigoAccent,
+    ),
+    Container(
+      color: Colors.limeAccent,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         onTap: _onBtmItemClick,
       ),
-      body: Container(
-        color: Colors.amber,
-      ),
+      body: _screen[_selectedIndex],
     );
   }
 
