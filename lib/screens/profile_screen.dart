@@ -11,9 +11,20 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _appBar(),
-            _username(),
-            _userBio(),
-            _editProfileBtn(),
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverList(
+                      delegate: SliverChildListDelegate(
+                    [
+                      _username(),
+                      _userBio(),
+                      _editProfileBtn(),
+                    ],
+                  ))
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -66,7 +77,9 @@ class ProfileScreen extends StatelessWidget {
           onPressed: () {},
           child: Text('Edit Profile'),
           borderSide: BorderSide(color: Colors.black45),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6),),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
         ),
       ),
     );
