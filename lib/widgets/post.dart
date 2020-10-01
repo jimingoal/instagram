@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
 import 'package:instagram/widgets/my_progress_indicator.dart';
+import 'package:instagram/widgets/rounded_avatar.dart';
 
 class Post extends StatelessWidget {
   final index;
@@ -26,13 +27,7 @@ class Post extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(common_xxs_gap),
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: 'https://picsum.photos/100',
-              width: avatar_size,
-              height: avatar_size,
-            ),
-          ),
+          child: RoundedAvatar(),
         ),
         Expanded(child: Text('username')),
         IconButton(icon: Icon(Icons.more_horiz), onPressed: null)
@@ -61,3 +56,5 @@ class Post extends StatelessWidget {
     );
   }
 }
+
+
