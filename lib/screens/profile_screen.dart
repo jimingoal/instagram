@@ -12,6 +12,7 @@ class ProfileScreen extends StatelessWidget {
           children: [
             _appBar(),
             _username(),
+            _userbio(),
           ],
         ),
       ),
@@ -41,6 +42,16 @@ class ProfileScreen extends StatelessWidget {
       child: Text(
         'username',
         style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
+  Widget _userBio() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: common_gap),
+      child: Text(
+        'this is what I believe',
+        style: TextStyle(fontWeight: FontWeight.w400),
       ),
     );
   }
