@@ -12,7 +12,8 @@ class ProfileScreen extends StatelessWidget {
           children: [
             _appBar(),
             _username(),
-            _userbio(),
+            _userBio(),
+            _editProfileBtn(),
           ],
         ),
       ),
@@ -52,6 +53,21 @@ class ProfileScreen extends StatelessWidget {
       child: Text(
         'this is what I believe',
         style: TextStyle(fontWeight: FontWeight.w400),
+      ),
+    );
+  }
+
+  Widget _editProfileBtn() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: common_gap),
+      child: SizedBox(
+        height: 24,
+        child: OutlineButton(
+          onPressed: () {},
+          child: Text('Edit Profile'),
+          borderSide: BorderSide(color: Colors.black45),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6),),
+        ),
       ),
     );
   }
