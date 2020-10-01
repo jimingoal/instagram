@@ -18,6 +18,7 @@ class Post extends StatelessWidget {
       children: [
         _postHeader(),
         _postImage(),
+        _postActions(),
       ],
     );
   }
@@ -55,6 +56,32 @@ class Post extends StatelessWidget {
       },
     );
   }
+
+  Widget _postActions() {
+    return Row(
+      children: [
+        IconButton(
+          icon: ImageIcon(AssetImage('assets/images/bookmark.png')),
+          onPressed: null,
+          color: Colors.black87
+        ),
+        IconButton(
+          icon: ImageIcon(AssetImage('assets/images/comment.png')),
+          onPressed: null,
+          color: Colors.black87
+        ),
+        IconButton(
+          icon: ImageIcon(AssetImage('assets/images/direct_message.png')),
+          onPressed: null,
+          color: Colors.black87
+        ),
+        Spacer(),
+        IconButton(
+          icon: ImageIcon(AssetImage('assets/images/heart.png')),
+          onPressed: null,
+          color: Colors.black87
+        ),
+      ],
+    );
+  }
 }
-
-
