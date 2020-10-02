@@ -1,8 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
 import 'package:instagram/constants/screen_size.dart';
 
-enum SelectedTab {left, right}
+enum SelectedTab { left, right }
 
 class ProfileBody extends StatefulWidget {
   @override
@@ -10,8 +11,6 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
-
-
   SelectedTab _selectedTab = SelectedTab.left;
 
   @override
@@ -20,15 +19,29 @@ class _ProfileBodyState extends State<ProfileBody> {
       child: CustomScrollView(
         slivers: [
           SliverList(
-              delegate: SliverChildListDelegate(
-            [
-              _username(),
-              _userBio(),
-              _editProfileBtn(),
-              _tabButtons(),
-              _selectedIndicator(),
-            ],
-          ))
+            delegate: SliverChildListDelegate(
+              [
+                _username(),
+                _userBio(),
+                _editProfileBtn(),
+                _tabButtons(),
+                _selectedIndicator(),
+              ],
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: GridView.count(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              crossAxisCount: 3,
+              childAspectRatio: 1,
+              children: List.generate(
+                  30,
+                  (index) => CachedNetworkImage(
+                    fit: BoxFit.cover,
+                      imageUrl: "https://picsum.photos/id/$index/100/100")),
+            ),
+          )
         ],
       ),
     );
@@ -79,7 +92,9 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: IconButton(
             icon: ImageIcon(
               AssetImage('assets/images/grid.png'),
-              color: _selectedTab == SelectedTab.left ? Colors.black : Colors.black26,
+              color: _selectedTab == SelectedTab.left
+                  ? Colors.black
+                  : Colors.black26,
             ),
             onPressed: () {
               setState(() {
@@ -92,7 +107,9 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: IconButton(
             icon: ImageIcon(
               AssetImage('assets/images/saved.png'),
-              color: _selectedTab == SelectedTab.left ? Colors.black26 : Colors.black,
+              color: _selectedTab == SelectedTab.left
+                  ? Colors.black26
+                  : Colors.black,
             ),
             onPressed: () {
               setState(() {
@@ -108,7 +125,9 @@ class _ProfileBodyState extends State<ProfileBody> {
   _selectedIndicator() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
-      alignment: _selectedTab == SelectedTab.left ? Alignment.centerLeft : Alignment.centerRight,
+      alignment: _selectedTab == SelectedTab.left
+          ? Alignment.centerLeft
+          : Alignment.centerRight,
       child: Container(
         height: 3,
         width: size.width / 2,
