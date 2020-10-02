@@ -58,16 +58,16 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   GridView _images() {
     return GridView.count(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            crossAxisCount: 3,
-            childAspectRatio: 1,
-            children: List.generate(
-                30,
-                (index) => CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: "https://picsum.photos/id/$index/100/100")),
-          );
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      crossAxisCount: 3,
+      childAspectRatio: 1,
+      children: List.generate(
+          30,
+          (index) => CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: "https://picsum.photos/id/$index/100/100")),
+    );
   }
 
   Widget _username() {
@@ -120,11 +120,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                   : Colors.black26,
             ),
             onPressed: () {
-              setState(() {
-                _selectedTab = SelectedTab.left;
-                _leftImagesPagesMargin = 0;
-                _rightImagesPagesMargin = size.width;
-              });
+              _tabSelected(SelectedTab.left);
             },
           ),
         ),
@@ -132,21 +128,34 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: IconButton(
             icon: ImageIcon(
               AssetImage('assets/images/saved.png'),
-              color: _selectedTab == SelectedTab.left
-                  ? Colors.black26
-                  : Colors.black,
+              color: _selectedTab == SelectedTab.right
+                  ? Colors.black
+                  : Colors.black26,
             ),
             onPressed: () {
-              setState(() {
-                _selectedTab = SelectedTab.right;
-                _leftImagesPagesMargin = -size.width;
-                _rightImagesPagesMargin = 0;
-              });
+              _tabSelected(SelectedTab.right);
             },
           ),
         ),
       ],
     );
+  }
+
+  _tabSelected (SelectedTab selectedTab) {
+    setState(() {
+      switch (selectedTab) {
+        case SelectedTab.left:
+          _selectedTab = SelectedTab.left;
+          _leftImagesPagesMargin = 0;
+          _rightImagesPagesMargin = size.width;
+          break;
+        case SelectedTab.right:
+          _selectedTab = SelectedTab.right;
+          _leftImagesPagesMargin = -size.width;
+          _rightImagesPagesMargin = 0;
+          break;
+      }
+    });
   }
 
   _selectedIndicator() {
