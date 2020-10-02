@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
+import 'package:instagram/widgets/profile_body.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -11,20 +12,7 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _appBar(),
-            Expanded(
-              child: CustomScrollView(
-                slivers: [
-                  SliverList(
-                      delegate: SliverChildListDelegate(
-                    [
-                      _username(),
-                      _userBio(),
-                      _editProfileBtn(),
-                    ],
-                  ))
-                ],
-              ),
-            ),
+            ProfileBody(),
           ],
         ),
       ),
@@ -45,43 +33,6 @@ class ProfileScreen extends StatelessWidget {
           onPressed: () {},
         )
       ],
-    );
-  }
-
-  Widget _username() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: common_gap),
-      child: Text(
-        'username',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  Widget _userBio() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: common_gap),
-      child: Text(
-        'this is what I believe',
-        style: TextStyle(fontWeight: FontWeight.w400),
-      ),
-    );
-  }
-
-  Widget _editProfileBtn() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: common_gap),
-      child: SizedBox(
-        height: 24,
-        child: OutlineButton(
-          onPressed: () {},
-          child: Text('Edit Profile'),
-          borderSide: BorderSide(color: Colors.black45),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
-        ),
-      ),
     );
   }
 }
