@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
 import 'package:instagram/constants/screen_size.dart';
+import 'package:instagram/widgets/rounded_avatar.dart';
 
 enum SelectedTab { left, right }
 
@@ -23,6 +24,7 @@ class _ProfileBodyState extends State<ProfileBody> {
           SliverList(
             delegate: SliverChildListDelegate(
               [
+                _profileHeader(),
                 _username(),
                 _userBio(),
                 _editProfileBtn(),
@@ -37,38 +39,50 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 
-  SliverToBoxAdapter _imagesPager() {
-    return SliverToBoxAdapter(
-      child: Stack(
-        children: [
-          AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            transform: Matrix4.translationValues(_leftImagesPagesMargin, 0, 0),
-            child: _images(),
+  _profileHeader() {
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(common_gap),
+          child: RoundedAvatar(
+            size: 60,
           ),
-          AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            transform: Matrix4.translationValues(_rightImagesPagesMargin, 0, 0),
-            child: _images(),
+        ),
+        Expanded(
+          child: Table(
+            children: [
+              TableRow(children: [
+                _valueText('12345'),
+                _valueText('1234'),
+                _valueText('1234'),
+              ]),
+              TableRow(children: [
+                _labelText('Post'),
+                _labelText('Followers'),
+                _labelText('Following'),
+              ]),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  GridView _images() {
-    return GridView.count(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      crossAxisCount: 3,
-      childAspectRatio: 1,
-      children: List.generate(
-          30,
-          (index) => CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: "https://picsum.photos/id/$index/100/100")),
-    );
-  }
+  Text _valueText(String value) => Text(
+        value,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      );
+
+  Text _labelText(String label) => Text(
+        label,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontWeight: FontWeight.w400,
+        ),
+      );
 
   Widget _username() {
     return Padding(
@@ -141,7 +155,7 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 
-  _tabSelected (SelectedTab selectedTab) {
+  _tabSelected(SelectedTab selectedTab) {
     setState(() {
       switch (selectedTab) {
         case SelectedTab.left:
@@ -169,6 +183,39 @@ class _ProfileBodyState extends State<ProfileBody> {
         width: size.width / 2,
         color: Colors.black87,
       ),
+    );
+  }
+
+  SliverToBoxAdapter _imagesPager() {
+    return SliverToBoxAdapter(
+      child: Stack(
+        children: [
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            transform: Matrix4.translationValues(_leftImagesPagesMargin, 0, 0),
+            child: _images(),
+          ),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            transform: Matrix4.translationValues(_rightImagesPagesMargin, 0, 0),
+            child: _images(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  GridView _images() {
+    return GridView.count(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      crossAxisCount: 3,
+      childAspectRatio: 1,
+      children: List.generate(
+          30,
+          (index) => CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: "https://picsum.photos/id/$index/100/100")),
     );
   }
 }
