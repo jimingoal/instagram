@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
 import 'package:instagram/constants/screen_size.dart';
 
+enum SelectedTab {left, right}
+
 class ProfileBody extends StatefulWidget {
   @override
   _ProfileBodyState createState() => _ProfileBodyState();
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
-  bool selectedIcon = true;
+
+
+  SelectedTab _selectedTab = SelectedTab.left;
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +79,11 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: IconButton(
             icon: ImageIcon(
               AssetImage('assets/images/grid.png'),
-              color: selectedIcon ? Colors.black : Colors.black26,
+              color: _selectedTab == SelectedTab.left ? Colors.black : Colors.black26,
             ),
             onPressed: () {
               setState(() {
-                selectedIcon = true;
+                _selectedTab = SelectedTab.left;
               });
             },
           ),
@@ -88,11 +92,11 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: IconButton(
             icon: ImageIcon(
               AssetImage('assets/images/saved.png'),
-              color: selectedIcon ? Colors.black26 : Colors.black,
+              color: _selectedTab == SelectedTab.left ? Colors.black26 : Colors.black,
             ),
             onPressed: () {
               setState(() {
-                selectedIcon = false;
+                _selectedTab = SelectedTab.right;
               });
             },
           ),
@@ -104,7 +108,7 @@ class _ProfileBodyState extends State<ProfileBody> {
   _selectedIndicator() {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
-      alignment: selectedIcon ? Alignment.centerLeft : Alignment.centerRight,
+      alignment: _selectedTab == SelectedTab.left ? Alignment.centerLeft : Alignment.centerRight,
       child: Container(
         height: 3,
         width: size.width / 2,
