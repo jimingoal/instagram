@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:instagram/screens/feed_screen.dart';
 import 'package:instagram/screens/profile_screen.dart';
 
+import 'constants/screen_size.dart';
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -34,6 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (size == null) size = MediaQuery.of(context).size;
+
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,

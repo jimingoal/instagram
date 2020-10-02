@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
+import 'package:instagram/constants/screen_size.dart';
 
 class ProfileBody extends StatefulWidget {
   @override
@@ -20,36 +21,8 @@ class _ProfileBodyState extends State<ProfileBody> {
               _username(),
               _userBio(),
               _editProfileBtn(),
-              Row(
-                children: [
-                  Expanded(
-                    child: IconButton(
-                      icon: ImageIcon(
-                        AssetImage('assets/images/grid.png'),
-                        color: selectedIcon ? Colors.black : Colors.black26,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          selectedIcon = true;
-                        });
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: IconButton(
-                      icon: ImageIcon(
-                        AssetImage('assets/images/saved.png'),
-                        color: selectedIcon ? Colors.black26 : Colors.black,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          selectedIcon = false;
-                        });
-                      },
-                    ),
-                  ),
-                ],
-              ),
+              _tabButtons(),
+              _selectedIndicator(),
             ],
           ))
         ],
@@ -69,7 +42,8 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   Widget _userBio() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: common_gap, vertical:  common_xxs_gap),
+      padding: const EdgeInsets.symmetric(
+          horizontal: common_gap, vertical: common_xxs_gap),
       child: Text(
         'this is what I believe',
         style: TextStyle(fontWeight: FontWeight.w400),
@@ -90,6 +64,51 @@ class _ProfileBodyState extends State<ProfileBody> {
             borderRadius: BorderRadius.circular(6),
           ),
         ),
+      ),
+    );
+  }
+
+  Row _tabButtons() {
+    return Row(
+      children: [
+        Expanded(
+          child: IconButton(
+            icon: ImageIcon(
+              AssetImage('assets/images/grid.png'),
+              color: selectedIcon ? Colors.black : Colors.black26,
+            ),
+            onPressed: () {
+              setState(() {
+                selectedIcon = true;
+              });
+            },
+          ),
+        ),
+        Expanded(
+          child: IconButton(
+            icon: ImageIcon(
+              AssetImage('assets/images/saved.png'),
+              color: selectedIcon ? Colors.black26 : Colors.black,
+            ),
+            onPressed: () {
+              setState(() {
+                selectedIcon = false;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  _selectedIndicator() {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      alignment: selectedIcon ? Alignment.centerLeft : Alignment.centerRight,
+      child: Container(
+        height: 3,
+        width: size.width / 2,
+        color: Colors.black87,
       ),
     );
   }

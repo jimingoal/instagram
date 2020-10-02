@@ -1,20 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
+import 'package:instagram/constants/screen_size.dart';
 import 'package:instagram/widgets/comment.dart';
 import 'package:instagram/widgets/my_progress_indicator.dart';
 import 'package:instagram/widgets/rounded_avatar.dart';
 
 class Post extends StatelessWidget {
   final index;
-  Size size;
 
   Post(this.index);
 
   @override
   Widget build(BuildContext context) {
-    if (size == null) size = MediaQuery.of(context).size;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -99,10 +97,6 @@ class Post extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(common_gap),
         child: Comment(
-          showImage: false,
-          userName: 'testingUser',
-          text: 'I have money'
-        ));
+            showImage: false, userName: 'testingUser', text: 'I have money'));
   }
 }
-
