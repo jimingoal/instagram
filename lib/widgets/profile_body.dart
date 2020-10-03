@@ -7,6 +7,10 @@ import 'package:instagram/widgets/rounded_avatar.dart';
 enum SelectedTab { left, right }
 
 class ProfileBody extends StatefulWidget {
+  final Function onMenuChanged;
+
+  const ProfileBody({Key key, this.onMenuChanged}) : super(key: key);
+
   @override
   _ProfileBodyState createState() => _ProfileBodyState();
 }
@@ -18,24 +22,51 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                _profileHeader(),
-                _username(),
-                _userBio(),
-                _editProfileBtn(),
-                _tabButtons(),
-                _selectedIndicator(),
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _appBar(),
+          Expanded(
+            child: CustomScrollView(
+              slivers: [
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [
+                      _profileHeader(),
+                      _username(),
+                      _userBio(),
+                      _editProfileBtn(),
+                      _tabButtons(),
+                      _selectedIndicator(),
+                    ],
+                  ),
+                ),
+                _imagesPager()
               ],
             ),
           ),
-          _imagesPager()
         ],
       ),
+    );
+  }
+
+  Row _appBar() {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            'The coding Papa',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        IconButton(
+          icon: Icon(Icons.menu),
+          onPressed:  () {
+            widget.onMenuChanged();
+          },
+        )
+      ],
     );
   }
 
