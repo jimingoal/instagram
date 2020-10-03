@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/constants/common_size.dart';
 import 'package:instagram/constants/screen_size.dart';
+import 'package:instagram/screens/profile_screen.dart';
 import 'package:instagram/widgets/rounded_avatar.dart';
 
 enum SelectedTab { left, right }
@@ -62,7 +63,7 @@ class _ProfileBodyState extends State<ProfileBody> {
         ),
         IconButton(
           icon: Icon(Icons.menu),
-          onPressed:  () {
+          onPressed: () {
             widget.onMenuChanged();
           },
         )
@@ -205,7 +206,7 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   _selectedIndicator() {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: duration,
       alignment: _selectedTab == SelectedTab.left
           ? Alignment.centerLeft
           : Alignment.centerRight,
@@ -222,12 +223,12 @@ class _ProfileBodyState extends State<ProfileBody> {
       child: Stack(
         children: [
           AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+            duration: duration,
             transform: Matrix4.translationValues(_leftImagesPagesMargin, 0, 0),
             child: _images(),
           ),
           AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+            duration: duration,
             transform: Matrix4.translationValues(_rightImagesPagesMargin, 0, 0),
             child: _images(),
           ),
