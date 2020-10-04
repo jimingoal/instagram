@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/constants/common_size.dart';
 import 'package:instagram/constants/screen_size.dart';
 import 'package:instagram/widgets/profile_body.dart';
 import 'package:instagram/widgets/profile_side_menu.dart';
