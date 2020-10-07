@@ -104,9 +104,21 @@ class _SignUpFormState extends State<SignUpForm> {
       hintText: text,
       filled: true,
       fillColor: Colors.grey[100],
-      border: OutlineInputBorder(
+      enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.grey[300],
+        ),
+        borderRadius: BorderRadius.circular(common_s_gap),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey[300],
+        ),
+        borderRadius: BorderRadius.circular(common_s_gap),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.redAccent,
         ),
         borderRadius: BorderRadius.circular(common_s_gap),
       ),
