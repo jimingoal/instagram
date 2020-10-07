@@ -11,10 +11,14 @@ class _SignUpFormState extends State<SignUpForm> {
   GlobalKey _formKey = GlobalKey();
 
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _pwController = TextEditingController();
+  TextEditingController _cpwController = TextEditingController();
 
   @override
   void dispose() {
     _emailController.dispose();
+    _pwController.dispose();
+    _cpwController.dispose();
     super.dispose();
   }
 
@@ -54,8 +58,44 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
               },
             ),
-            TextField(),
-            TextField(),
+            SizedBox(
+              height: common_gap,
+            ),
+            TextFormField(
+              controller: _pwController,
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[300]),
+                      borderRadius: BorderRadius.circular(common_s_gap))),
+              validator: (text) {
+                if (text.isNotEmpty && text.length >= 4) {
+                  return null;
+                } else {
+                  return '제대로 된 비밀를 입력해주세요.';
+                }
+              },
+            ),
+            SizedBox(
+              height: common_gap,
+            ),
+            TextFormField(
+              controller: _cpwController,
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.grey[100],
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[300]),
+                      borderRadius: BorderRadius.circular(common_s_gap))),
+              validator: (text) {
+                if (text.isNotEmpty && _pwController.text == text) {
+                  return null;
+                } else {
+                  return '입력된 값이 비밀번호와 일치하지 않습니다. 다시 입력해주세요.';
+                }
+              },
+            ),
           ],
         ),
       ),
