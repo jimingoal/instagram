@@ -16,8 +16,14 @@ class _AuthScreenState extends State<AuthScreen> {
       child: Stack(
         children: [
           FadeStack(selectedForm),
-          Container(
-            child: FlatButton(
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              color: Colors.white,
+              child: FlatButton(
                 onPressed: () {
                   setState(() {
                     if (selectedForm == 0) {
@@ -27,7 +33,24 @@ class _AuthScreenState extends State<AuthScreen> {
                     }
                   });
                 },
-                child: Text('go to Sign up')),
+                child: RichText(
+                  text: TextSpan(
+                      text: selectedForm == 0
+                          ? "Don't have an account? "
+                          : 'Already have an account? ',
+                      style: TextStyle(color: Colors.grey, fontSize: 16),
+                      children: [
+                        TextSpan(
+                          text: selectedForm == 0 ? 'Sign Up' : 'Sign in',
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ]),
+                ),
+              ),
+            ),
           ),
         ],
       ),
