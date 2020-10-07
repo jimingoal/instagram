@@ -8,7 +8,7 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  GlobalKey _formKey = GlobalKey();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _pwController = TextEditingController();
@@ -40,16 +40,7 @@ class _SignUpFormState extends State<SignUpForm> {
             TextFormField(
               controller: _emailController,
               cursorColor: Colors.black45,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.grey[100],
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey[300],
-                  ),
-                  borderRadius: BorderRadius.circular(common_s_gap),
-                ),
-              ),
+              decoration: _inputDecoration('Email'),
               validator: (text) {
                 if (text.isNotEmpty && text.contains("@")) {
                   return null;
@@ -63,12 +54,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             TextFormField(
               controller: _pwController,
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[100],
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[300]),
-                      borderRadius: BorderRadius.circular(common_s_gap))),
+              decoration: _inputDecoration('Password'),
               validator: (text) {
                 if (text.isNotEmpty && text.length >= 4) {
                   return null;
@@ -82,12 +68,7 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
             TextFormField(
               controller: _cpwController,
-              decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.grey[100],
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey[300]),
-                      borderRadius: BorderRadius.circular(common_s_gap))),
+              decoration: _inputDecoration('Confirm Password'),
               validator: (text) {
                 if (text.isNotEmpty && _pwController.text == text) {
                   return null;
@@ -96,8 +77,38 @@ class _SignUpFormState extends State<SignUpForm> {
                 }
               },
             ),
+            SizedBox(
+              height: common_gap,
+            ),
+            FlatButton(
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  print('Validation success!!');
+                }
+              },
+              child: Text('Join'),
+              textColor: Colors.white,
+              color: Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(common_s_gap),
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  InputDecoration _inputDecoration(String text) {
+    return InputDecoration(
+      hintText: text,
+      filled: true,
+      fillColor: Colors.grey[100],
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey[300],
+        ),
+        borderRadius: BorderRadius.circular(common_s_gap),
       ),
     );
   }
