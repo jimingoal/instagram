@@ -21,9 +21,11 @@ class _AuthScreenState extends State<AuthScreen> {
             right: 0,
             left: 0,
             child: Container(
-              alignment: Alignment.bottomCenter,
               color: Colors.white,
               child: FlatButton(
+                shape: Border(
+                  top: BorderSide(color: Colors.grey),
+                ),
                 onPressed: () {
                   setState(() {
                     if (selectedForm == 0) {
